@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quản lý sản phẩm</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.panel {
+			width: 60%;
+			margin: 0 auto;
+			border: solid #4267b2 1px;
+		}
+
+		.panel-heading {
+			background-color: #4267b2;
+			padding: 10px;
+			color: white;
+		}
+
+		.panel-body {
+			padding: 10px;
+		}
+
+		.panel-body label {
+			font-weight: bold;
+		}
+
+		.form-group {
+			display: block;
+			margin-bottom: 20px;
+		}
+
+		.form-control {
+			display: block;
+			width: 98%;
+			font-size: 16px;
+			margin-top: 10px;
+		}
+
+		.table {
+			width: 100%;
+		}
+
+		.table tr {
+			border-bottom: solid blue 1px;
+		}
+	</style>
+</head>
+<body>
+	<div class="panel">
+		<div class="panel-heading">
+			Nhập chi tiết thông tin sản phẩm
+		</div>
+		<div class="panel-body">
+			<form method="post">
+				<div class="form-group">
+					<label>Tên:</label>
+					<input type="number" name="index" id="index" value="" hidden="true">
+					<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Enter product name">
+				</div>
+				<div class="form-group">
+					<label>Hiệu:</label>
+					<select class="form-control" id="manuafaturer_name" onchange="changeManufaturer()">
+						<option value="">-- Choose --</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Loại:</label>
+					<select class="form-control" id="category_name">
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Giá:</label>
+					<input class="form-control" type="number" name="price" id="price" placeholder="Enter price" value="0" onkeyup="updateTotalPrice()">
+				</div>
+				<div class="form-group">
+					<label>Số lượng:</label>
+					<input class="form-control" type="text" name="quantity" id="quantity" placeholder="Enter quantity" value="0" onkeyup="updateTotalPrice()">
+				</div>
+				<div class="form-group">
+					<label>Tổng tiền:</label>
+					<input class="form-control" type="text" name="total_price" id="total_price" value="0" disabled="true">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success" type="button" onclick="addProduct()">Thêm sản phẩm</button>
+					<button class="btn btn-danger" type="reset">Reset</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="panel" style="margin-top: 20px;">
+		<div class="panel-heading">
+			Danh sách
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Số</th>
+						<th>Tên sản phẩm</th>
+						<th>Thương hiệu</th>
+						<th>Loại</th>
+						<th>Giá</th>
+						<th>Số lượng</th>
+						<th>Tổng tiền</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="result">
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var manufactureList = {
+			"4KFarm": [
+				"Rau"
+			],
+			"C.P": [
+				"Thịt", "Xúc xích", "Lạp xưởng", "Chả", "Khác"
+			],
+			"Phi Long": [
+				"Thịt", "Hải sản", "Rau củ đông lạnh", "Thực phẩm chế biến sẵn"
+			],
+			"Ngon Ngon food": [
+				"Thịt", "Hải sản", "Rau củ quả", "Trái cây"
+			],
+			"Nghi Khánh": [
+				"Thịt", "Hải sản", "Nước yến"
+			],
+			"Tuấn Nguyễn": [
+				"Cá", "Giấm", "Nước màu"
+			],
+			"Thảo Tiên Foods": [
+				"Thịt", "Khác"
+			],
+			"Godaco": [
+				"Chả", "Thực phẩm chế biến sẵn", "Thịt, hải sản đông lạnh"
+			],
+			"TÂN HẢI HÒA": [
+				"Thịt", "Khác"
+			],
+			"Tân Việt Sin": [
+				"Cá", "Bò", "Chả cá", "Mì ăn liền"
+			],
+			"SG Food": [
+				"Thịt", "Hải sản", "Thực phẩm chế biến sẵn"
+			]
+
+		}
+
+		var productList = []
+
+		var manuafaturerTag = document.getElementById('manuafaturer_name')
+		for(var key in manufactureList) {
+			manuafaturerTag.innerHTML += `<option value='${key}'>${key}</option>`
+		}
+
+		function changeManufaturer() {
+			key = manuafaturerTag.value
+			categoryList = manufactureList[key]
+			console.log(categoryList)
+
+			var categoruTag = document.getElementById('category_name')
+			categoruTag.innerHTML = ''
+
+			if(categoryList != null) {
+				for (var i = 0; i < categoryList.length; i++) {
+					categoruTag.innerHTML += `<option value='${categoryList[i]}'>${categoryList[i]}</option>`
+				}
+			}
+		}
+
+		function updateTotalPrice() {
+			var price = document.getElementById('price').value
+			var quantity = document.getElementById('quantity').value
+
+			totalPrice = price * quantity
+
+			document.getElementById('total_price').value = totalPrice
+		}
+
+		var count = 0
+		function addProduct() {
+			var index = document.getElementById('index').value
+			var productName = document.getElementById('product_name').value
+			var manufactureName = document.getElementById('manuafaturer_name').value
+			var categoryName = document.getElementById('category_name').value
+			var price = document.getElementById('price').value
+			var quantity = document.getElementById('quantity').value
+			var totalPrice = document.getElementById('total_price').value
+
+			var product = {
+				'productName': productName,
+				'manufactureName': manufactureName,
+				'categoryName': categoryName,
+				'price': price,
+				'quantity': quantity,
+				'totalPrice': totalPrice
+			}
+
+			if(index != '') {
+				productList[index] = product
+				showProduct()
+				return;
+			}
+
+			productList.push(product)
+
+			document.getElementById('result').innerHTML += `<tr>
+						<td>${++count}</td>
+						<td>${productName}</td>
+						<td>${manufactureName}</td>
+						<td>${categoryName}</td>
+						<td>${price}</td>
+						<td>${quantity}</td>
+						<td>${totalPrice}</td>
+						<td><button class="btn btn-warning" onclick="editProduct(${count - 1})">Edit</button></td>
+						<td><button class="btn btn-danger" onclick="deleteProduct(${count - 1})">Delete</button></td>
+					</tr>`
+		}
+
+		function deleteProduct(index) {
+			console.log(index)
+			productList.splice(index, 1)
+			showProduct();
+		}
+
+		function showProduct() {
+			document.getElementById('result').innerHTML = ''
+
+			for (var i = 0; i < productList.length; i++) {
+				document.getElementById('result').innerHTML += `<tr>
+						<td>${i+1}</td>
+						<td>${productList[i].productName}</td>
+						<td>${productList[i].manufactureName}</td>
+						<td>${productList[i].categoryName}</td>
+						<td>${productList[i].price}</td>
+						<td>${productList[i].quantity}</td>
+						<td>${productList[i].totalPrice}</td>
+						<td><button class="btn btn-warning" onclick="editProduct(${i})">Edit</button></td>
+						<td><button class="btn btn-danger" onclick="deleteProduct(${i})">Delete</button></td>
+					</tr>`
+			}
+		}
+
+		function editProduct(index) {
+			var product = productList[index]
+			console.log(product)
+			document.getElementById('index').value = index
+			document.getElementById('product_name').value = product.productName
+			document.getElementById('manuafaturer_name').value = product.manufactureName
+			changeManufaturer()
+			document.getElementById('category_name').value = product.categoryName
+			document.getElementById('price').value = product.price
+			document.getElementById('quantity').value = product.quantity
+			document.getElementById('total_price').value = product.totalPrice
+		}
+	</script>
+</body>
+</html>

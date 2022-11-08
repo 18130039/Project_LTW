@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    </style>
+	<style type="text/css">
+		body{
+			font-family: 'Roboto', sans-serif;
+			background-image: url('img/organicproduce.jpg');
+			background-size: cover;
+		}
+		.container{
+			width: 400px;
+			height: 560px;
+			padding: 30px 0 0 0;
+			margin: 50px auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			border-radius: 15px;
+			background-color: white;
+			box-shadow: 0px 0px 15px #444;
+		}
+		.shadow{
+			box-shadow: 0px 1px 20px #eee;
+		}
+		form h2{
+			text-align: center;
+			font-weight: bold;
+			font-size: 1.8rem;
+			color: #307213;
+			margin: 30px auto;
+		}
+		input{
+			border:none;
+			font-size: 1rem;
+			width: 90%;
+			background-color: transparent;
+			height: 50px;
+			padding: 0 16px;
+			font-weight: 700;
+			outline: none;
+		}
+		.input-gr{
+			margin: 10px auto 20px;
+			font-size: .8rem;
+			width: 300px;
+			height: 50px;
+			border-radius: 16px;
+			padding: 0;
+		}
+		.label{
+			margin-left: 8px;
+			font-weight: 700;
+			font-size: .7rem;
+		}
+		::placeholder{
+			color: #307213;
+			font-weight: 700;
+			font-size: .9rem;
+			text-shadow: 0 0 2px #ddd;
+		}
+		
+		.submit{
+			width: 160px;
+			height: 50px;
+			margin: 30px auto 50px;
+			padding: 0;
+			transform: translateX(-3px);
+		}
+		button{
+			width: 165px;
+			height: 100%;
+			border-radius: 50px;
+			border:none;
+			background-color: #5bb403;
+			color: white;
+			font-weight: 700;
+			margin: auto;
+			outline: none;
+		}
+		.dot {
+		  height: 47px;
+		  width: 47px;
+		  box-shadow: 0 0 15px #ccc; 
+		  border-radius: 50%;
+		  display: inline-block;
+		  margin: 10px 4px;
+		  font-family: "Roboto", sans-serif;
+		  font-size: 32px;
+		  color: #005ab1;
+		  font-weight: bold;
+		  line-height: 50px;
+		  cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="preloder">
+        <div class="loader"></div>
+    </div>
+	<div class="container">
+		<form action="#">
+			<h2 style="text-shadow:0px 0px 2px #aaa;">Đăng Ký</h2>
+			<div class="input-gr shadow">
+				<input id="name" type="text" name="name" placeholder="Email">
+			</div>	
+			<div class="input-gr shadow">
+				<input id="password" type="password" name="password" placeholder="Mật khẩu">
+			</div>
+			<div class="input-gr shadow">
+				<input id="repassword" type="password" name="repassword" placeholder="Nhập lại mật khẩu">
+			</div>
+				
+			<div class="submit">
+				<button class="shadow" type="submit">ĐĂNG KÝ</button>
+			</div>
+
+			<div style="color: #999; font-size: .9rem; font-weight: 500; text-align: center;">
+				Or login with
+			</div>
+
+			<div class="icon" style="text-align: center;">
+				<div class="dot">
+				  <div style="user-select: none;">f</div>
+				</div>
+				<div class="dot">
+				 	<img src="img/search.png" style="width: 25px; height: 25px;">
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
