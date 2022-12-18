@@ -50,6 +50,9 @@ public class LoginControl extends HttpServlet {
 		} else if (action.equals("Register")) {
 
 		} else if (action.equals("Logout")) {
+			HttpSession httpSession = request.getSession();
+			httpSession.invalidate();
+			response.sendRedirect("home");
 
 		}
 

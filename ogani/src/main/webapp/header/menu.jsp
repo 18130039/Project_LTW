@@ -86,33 +86,37 @@ Account acc = (Account) session.getAttribute("userlogin");
 					</div>
 
 					<div class="hero__search__phone">
-
 						<div class="header__top__right__auth">
-							<a href=""><i class="fa fa-user"></i> Xin chào, <%
+							<%
 							if (acc != null) {
-								out.print(acc.getUserName());
+							%>
+							<div class="header__top__right__auth">
+								<i class="fa fa-user"></i> Xin chào,
+							</div>
+							<%
+							out.print(acc.getNameOfCustomer());
+							%>
+							<div class="header__top__right__auth">
+								<a href="login?action=Logout"><i class="fa fa-sign-out"></i>
+									Đăng xuất</a>
+							</div>
+							<%
 							}
-							%> </a>
+							%>
+							</a>
 						</div>
-
+						<%
+						if (acc == null) {
+						%>
 						<div class="header__top__right__auth mt-3 mr-3">
 							<a href="signup.jsp"><i class="fa fa-key"></i> Đăng ký</a>
 						</div>
 						<div class="header__top__right__auth">
 							<a href="login.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
 						</div>
-
-
-
-
-						<%-- 						<div class="header__top__right__auth mt-3 mr-3">
-							<a href="#"><i class="fa fa-user"></i>
-								${sessionScope.acc.user}</a>
-						</div>
-						<div class="header__top__right__auth">
-							<a href="logout"><i class="fa fa-sign-out"></i> Đăng xuất</a>
-						</div> --%>
-
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</div>
