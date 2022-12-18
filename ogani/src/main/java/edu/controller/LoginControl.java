@@ -1,8 +1,10 @@
 package edu.controller;
 
+import edu.Dao.AccountDao;
 import edu.beans.Account;
 import edu.entity.ProductEntity;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,11 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginControl", urlPatterns = "/login")
 public class LoginControl extends HttpServlet {
+	private static final long serialVersionUID = 1;
+
+	public LoginControl() {
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
@@ -20,24 +27,31 @@ public class LoginControl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		String username = request.getParameter("user");
-		String password = request.getParameter("pass");
-		Account a = new Account(0, username, password, 0, 0);
-		String from = request.getParameter("from");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
 
-		if (a.getUser().equals("admin") && a.getPass().equals("1234")) {
-			HttpSession session = request.getSession();
-			session.setAttribute("acc", a);
-			if (from.equalsIgnoreCase("")) {
-				response.sendRedirect("home");
+		String action = request.getParameter("action");
+		if (action == null) {
+			System.out.println("khong thuc hien duoc gi");
+		} else if (action.equals("Login")) {
+			String userName = request.getParameter("username");
+			String passWord = request.getParameter("password");
+			if (new AccountDao().checkLogin(userName, passWord)) {
+				HttpSession session = request.getSession();
+				Account acc = AccountDao.mapAccount.get(userName);
+				session.setAttribute("userlogin", acc);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+				dispatcher.forward(request, response);
 			} else {
-				response.sendRedirect("checkout");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
 			}
+		} else if (action.equals("Register")) {
 
-		} else {
-			request.setAttribute("mess", "Sai thông tin đăng nhập!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else if (action.equals("Logout")) {
+
 		}
+
 	}
 }

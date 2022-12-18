@@ -7,27 +7,26 @@ public class Product implements Serializable {
     private String name;
     private String img;
     private String price;
-    private String priceSale;
     private long priceLong;
     private int quantity;
 
     public Product() {
     }
 
-    public Product(String id, String name, String img, String price, String priceSale, long priceLong) {
+    public Product(String id, String name, String img, String price, long priceLong, int quantity) {
         this.id = id;
         this.name = name;
         this.img = img;
         this.price = price;
-        this.priceSale = priceSale;
         this.priceLong = priceLong;
+        this.quantity = quantity;
     }
 
     @Override
     public String toString() {
         return name +
                 ", Price: " + price +
-                ", Quantity: " + quantity;
+                ", Quantity: " + quantity + "\n";
     }
 
     public long getPriceLong() {
@@ -70,13 +69,6 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getPriceSale() {
-        return priceSale;
-    }
-
-    public void setPriceSale(String priceSale) {
-        this.priceSale = priceSale;
-    }
 
     public int getQuantity() { return quantity;}
 

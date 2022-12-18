@@ -13,17 +13,19 @@ import java.util.List;
 
 @WebServlet(name = "HomeControl", urlPatterns = "/home")
 public class HomeControl extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ProductEntity pe = new ProductEntity();
-        List<Category> listC = pe.getAllCategory();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		ProductEntity pe = new ProductEntity();
+		List<Category> listC = pe.getAllCategory();
 
-        request.setAttribute("listC",listC);
-        request.getRequestDispatcher("index.jsp").forward(request,response);
+		request.setAttribute("listC", listC);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 
-    }
+	}
 }

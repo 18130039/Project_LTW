@@ -1,71 +1,110 @@
 package edu.beans;
 
 public class Account {
-    private int id;
-    private String user;
-    private String pass;
-    private int isSell;
-    private int isAdmin;
+	private String userName;
+	private String passWord;
+	private String nameOfCustomer;
+	private String sex;
+	private String phoneNumber;
+	private String email;
+	private String dayOfBirth;
+	private String address;
+	private String role;
 
-    public Account() {
-    }
+	public Account() {
+	}
 
-    public Account(int id, String user, String pass, int isSell, int isAdmin) {
-        this.id = id;
-        this.user = user;
-        this.pass = pass;
-        this.isSell = isSell;
-        this.isAdmin = isAdmin;
-    }
+	public Account(String userName, String passWord, String nameOfCustomer, String sex, String phoneNumber,
+			String email, String dayOfBirth, String address, String role) {
+		super();
+		this.userName = userName;
+		this.passWord = passWord;
+		this.nameOfCustomer = nameOfCustomer;
+		this.sex = sex;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.dayOfBirth = dayOfBirth;
+		this.address = address;
+		this.role = role;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getUser() {
-        return user;
-    }
+	public String getPassWord() {
+		return passWord;
+	}
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
 
-    public String getPass() {
-        return pass;
-    }
+	public String getNameOfCustomer() {
+		return nameOfCustomer;
+	}
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
+	public void setNameOfCustomer(String nameOfCustomer) {
+		this.nameOfCustomer = nameOfCustomer;
+	}
 
-    public int getIsSell() {
-        return isSell;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public void setIsSell(int isSell) {
-        this.isSell = isSell;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public int getIsAdmin() {
-        return isAdmin;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-    public void setIsAdmin(int isAdmin) {
-        this.isAdmin = isAdmin;
-    }
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", user='" + user + '\'' +
-                ", pass='" + pass + '\'' +
-                ", isSell=" + isSell +
-                ", isAdmin=" + isAdmin +
-                '}';
-    }
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDayOfBirth() {
+		return dayOfBirth;
+	}
+
+	public void setDayOfBirth(String dayOfBirth) {
+		this.dayOfBirth = dayOfBirth;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [userName=" + userName + ", passWord=" + passWord + ", nameOfCustomer=" + nameOfCustomer
+				+ ", sex=" + sex + ", phoneNumber=" + phoneNumber + ", email=" + email + ", dayOfBirth=" + dayOfBirth
+				+ ", address=" + address + ", role=" + role + "]" + "\n";
+	}
+
 }

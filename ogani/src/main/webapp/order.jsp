@@ -277,7 +277,7 @@ if (acc == null) {
 		<div class="loader"></div>
 	</div>
 
-	<jsp:include page="menu.jsp"></jsp:include>
+	<jsp:include page="header/menu.jsp"></jsp:include>
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg"
@@ -407,8 +407,7 @@ if (acc == null) {
 				</div>
 			</div>
 			<div class="load-btn" style="margin-bottom: 1rem">
-				<a href="home" class="btn btn-success"
-					role="button">Xác nhận</a>
+				<a href="home" class="btn btn-success" role="button">Xác nhận</a>
 			</div>
 			<div name="wrongAlert"
 				style="margin-bottom: 1rem; text-align: center; color: red"
@@ -420,84 +419,105 @@ if (acc == null) {
 
 	<!-- Checkout Section End -->
 
-	<footer class="footer spad">
-		<div class="container">
-			<div class="row" style="display: flex; justify-content: center;">
-
-				<div class="col-lg-8 col-md-12" style="text-align: center;">
-					<div class="footer__widget">
-						<h2>Đăng ký nhận ưu đãi ngay!</h2>
-						<p style="font-size: 1rem">Nhận email về sản phẩm đặc biệt và
-							các ưu đãi hấp dẫn.</p>
-						<form action="#">
-							<input type="text" placeholder="Nhập địa chỉ email">
-							<button type="submit" class="site-btn">Đăng ký</button>
-						</form>
-						<div class="footer__widget__social">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-								class="fa fa-instagram"></i></a> <a href="#"><i
-								class="fa fa-twitter"></i></a> <a href="#"><i
-								class="fa fa-pinterest"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
+	<footer>
+		<jsp:include page="footer/footer.jsp"></jsp:include>
 	</footer>
 
 
 	<script>
+		$(document)
+				.ready(
+						function() {
 
-    $(document).ready(function(){
+							function calculateTotal(currentGroup) {
+								var groupTotal = 0;
+								currentGroup
+										.parents('table')
+										.find('.rowTotal')
+										.each(
+												function(i) {
+													groupTotal = Number(groupTotal)
+															+ Number($(this)
+																	.text());
+												});
+								currentGroup.parents('table').find('.total')
+										.text(groupTotal.toFixed(2));
+								currentGroup.parents('table').find('.subtotal')
+										.text(groupTotal.toFixed(2));
+							}
 
-        function calculateTotal(currentGroup) {
-            var groupTotal = 0;
-            currentGroup.parents('table').find('.rowTotal').each(function( i ){
-                groupTotal = Number(groupTotal) + Number( $(this).text() );
-            });
-            currentGroup.parents('table').find('.total').text(groupTotal.toFixed(2));
-            currentGroup.parents('table').find('.subtotal').text(groupTotal.toFixed(2));
-        }
+							$(".document.active")
+									.delegate(
+											".tdDelete",
+											"click",
+											function() {
+												if ($(this).parents('tbody')
+														.children().length > 1) {
+													$(this).prev().text('0');
+													calculateTotal($(this));
 
-        $(".document.active").delegate( ".tdDelete", "click", function() {
-            if ($(this).parents('tbody').children().length > 1){
-                $(this).prev().text('0');
-                calculateTotal($(this));
+													$(this).parents('tr')
+															.remove();
+												}
+											});
 
-                $(this).parents('tr').remove();
-            }
-        });
+							$(".document.active")
+									.delegate(
+											".trAdd",
+											"click",
+											function() {
+												$(this)
+														.parents('table')
+														.find('tbody')
+														.append(
+																$(this)
+																		.parents(
+																				'table')
+																		.find(
+																				'tbody tr:last-child')
+																		.clone());
+												calculateTotal($(this));
+											});
 
-        $(".document.active").delegate( ".trAdd", "click", function() {
-            $(this).parents('table').find('tbody').append( $(this).parents('table').find('tbody tr:last-child').clone() );
-            calculateTotal($(this));
-        });
+							$(".document.active").delegate(".amount", "keyup",
+									function() {
+										//console.log('test');
+										calculateTotal($(this));
+									});
 
-        $(".document.active").delegate( ".amount", "keyup", function() {
-            //console.log('test');
-            calculateTotal($(this));
-        });
+							var tdValues = [];
+							$(".document.active .proposedWork")
+									.delegate(
+											"td:not(.description .unit)",
+											"keyup",
+											function() {
+												tdValues.length = 0;
 
+												//Paint
+												$(this)
+														.parents('tr')
+														.find('td')
+														.each(
+																function(i) {
+																	if (i > 4) {
+																		return false
+																	}
+																	if (i == 4) {
+																		$(this)
+																				.text(
+																						tdValues[0]
+																								* tdValues[3])
+																	}
+																	tdValues[i] = Number($(
+																			this)
+																			.text());
+																});
 
+												calculateTotal($(this));
+											});
 
-
-        var tdValues = [];
-        $(".document.active .proposedWork").delegate( "td:not(.description .unit)", "keyup", function() {
-            tdValues.length = 0;
-
-            //Paint
-            $(this).parents('tr').find('td').each(function( i ){
-                if(i > 4){return false}
-                if(i == 4){$(this).text( tdValues[0]*tdValues[3] )}
-                tdValues[i] = Number( $(this).text() );
-            });
-
-            calculateTotal($(this));
-        });
-
-    });
-</script>
+						});
+	</script>
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
