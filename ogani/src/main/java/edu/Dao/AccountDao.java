@@ -34,8 +34,8 @@ public class AccountDao implements ObjectDAO {
 				String dayOfBirth = rs.getString(7);
 				String address = rs.getString(8);
 				String role = rs.getString(9);
-				Account account = new Account(userName, passWord, nameOfCustomer, sex, phoneNumber, email,
-						dayOfBirth, address, role);
+				Account account = new Account(userName, passWord, nameOfCustomer, sex, phoneNumber, email, dayOfBirth,
+						address, role);
 				mapTemp.put(account.getUserName(), account);
 			}
 		} catch (Exception e) {
@@ -143,5 +143,18 @@ public class AccountDao implements ObjectDAO {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean checkUser(String userName) {
+		Account acc = mapAccount.get(userName);
+		if (acc != null) {
+			if (acc.getUserName().equals(userName)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }

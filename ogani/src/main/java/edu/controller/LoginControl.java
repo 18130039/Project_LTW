@@ -48,7 +48,26 @@ public class LoginControl extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		} else if (action.equals("Register")) {
+			String userName = request.getParameter("username");
+			String email = request.getParameter("email");
+			String passWord = request.getParameter("password");
+			String re_passWord = request.getParameter("repassword");
+			String nameOfUser = request.getParameter("nameofuser");
 
+			if (new AccountDao().checkUser(userName)) {
+				request.setAttribute("mess", "Tai khoan da ton tai");
+				request.getRequestDispatcher("signup.jsp").forward(request, response);
+			} else {
+				Account newAccount = new Account(userName, re_passWord, nameOfUser, "", "", email, "", "", "");
+				newAccount.setUserName(userName);
+				newAccount.setPassWord(passWord);
+				newAccount.setNameOfCustomer(nameOfUser);
+				newAccount.setEmail(email);
+				new AccountDao().add(newAccount);
+
+			}
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
 		} else if (action.equals("Logout")) {
 			HttpSession httpSession = request.getSession();
 			httpSession.invalidate();
