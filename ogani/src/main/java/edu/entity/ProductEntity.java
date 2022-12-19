@@ -258,6 +258,7 @@ public class ProductEntity {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		ProductEntity pe = new ProductEntity();
+		System.out.println(pe.getAllCategory());
 	}
 
 }
