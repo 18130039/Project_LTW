@@ -79,20 +79,7 @@ public class AccountDAO {
 		}
 	}
 
-	public int count(String txtSearch) throws SQLException, ClassNotFoundException {
 
-		String query = "select count(*) from Product where pName like " + "'%" + txtSearch + "%'";
-		con = ConnectDB.getConnect();
-		ps = con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery(query);
-		while (rs.next()) {
-			return rs.getInt(1);
-		}
-
-		rs.close();
-		ps.close();
-		return 0;
-	}
 
 	public static void main(String[] args) {
 		AccountDAO accountDAO = new AccountDAO();
