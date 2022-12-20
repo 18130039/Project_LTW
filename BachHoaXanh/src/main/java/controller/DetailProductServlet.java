@@ -13,7 +13,7 @@ import model.Product;
 import java.io.IOException;
 
 @WebServlet(name = "DetailControl", urlPatterns = "/detail")
-public class DetailControl extends HttpServlet {
+public class DetailProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

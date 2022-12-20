@@ -1,20 +1,21 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Collection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.Cart;
+import dao.ProductDAO;
 
 /**
- * Servlet implementation class CheckOutController
+ * Servlet implementation class ListDataServlet
  */
-@WebServlet("/checkout")
-public class CheckOutController extends HttpServlet {
+@WebServlet("/ListData")
+public class ListDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -24,19 +25,9 @@ public class CheckOutController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-
-		Cart c = Cart.getCart(session);
-		long total = c.total();
-
-		String emptyAlert = "Không có sản phẩm trong giỏ hàng";
-		if (total == 0.0) {
-			request.setAttribute("emptyAlert", emptyAlert);
-			request.getRequestDispatcher("cart.jsp").forward(request, response);
-		} else {
-			c.commit(session);
-			response.sendRedirect("checkout.jsp");
-		}
+		ProductDAO productDAO = new ProductDAO();
+		request.setAttribute("list", productDAO);
+		request.getRequestDispatcher("meat.jsp").forward(request, response);
 	}
 
 }
