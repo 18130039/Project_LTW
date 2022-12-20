@@ -220,8 +220,8 @@ public class ProductDAO {
 
 	public List<Product> getListByCate(int cid, int index, int size) {
 		List<Product> list = new LinkedList<>();
-		String sql = "with x as(select *,ROW_NUMBER() over (ORDER by id) as r\n"
-				+ "                from products where cateId=?)\n"
+		String sql = "with x as(select *,ROW_NUMBER() over (ORDER by pId) as r\n"
+				+ "                from Product where cateId=?)\n"
 				+ "                select * from x where r between (?*?-(?-1)) and (?*?)";
 	
 		try {
@@ -233,6 +233,7 @@ public class ProductDAO {
 			ps.setInt(4, size);
 			ps.setInt(5, index);
 			ps.setInt(6, size);
+			ps.setInt(7, size);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
