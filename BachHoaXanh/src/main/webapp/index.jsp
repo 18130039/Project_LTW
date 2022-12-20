@@ -91,12 +91,11 @@
 						<i class="fa fa-bars"></i> <span>Danh mục</span>
 					</div>
 					<ul>
-						<li><a href="category?index=1&cid=1">Thịt và hải sản</a></li>
-						<li><a href="category?index=1&cid=2">Rau quả</a></li>
-						<li><a href="category?index=1&cid=3">Trái cây</a></li>
-						<li><a href="category?index=1&cid=4">Thức ăn nhanh</a></li>
-						<li><a href="category?index=1&cid=5">Trứng</a></li>
-						<li><a href="category?index=1&cid=6">Sữa</a></li>
+						<li><a href="category?index=1&cid=01">Thịt và hải sản</a></li>
+						<li><a href="category?index=1&cid=02">Rau quả</a></li>
+						<li><a href="category?index=1&cid=03">Trái cây</a></li>
+						<li><a href="category?index=1&cid=04">Thức ăn nhanh</a></li>
+
 
 					</ul>
 				</div>

@@ -18,10 +18,10 @@
                         <li class="active"><a href="home">Trang chủ</a></li>
                         <li><a href="shopGrid?index=1">Cửa hàng</a></li>
                         <li><a href="./contact.jsp">Liên hệ</a></li>
-                        <c:if test="${sessionScope.acc.isSell == 1}">
+                        <c:if test="${sessionScope.acc.isAdmin == 1}">
                             <li><a href="manage?index=1">Quản lý sản phẩm</a></li>
                         </c:if>
-                        <c:if test="${sessionScope.acc.isAdmin == 1}">
+                        <c:if test="${sessionScope.acc.isSell == 0}">
                             <li><a href="#">Quản lý tài khoản</a></li>
                         </c:if>
                     </ul>
