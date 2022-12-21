@@ -65,13 +65,12 @@ public class OrderServlet extends HttpServlet {
 		request.setAttribute("dienthoai", phone);
 		request.setAttribute("sanpham", sanpham);
 
-		String billDetail = "Khách hàng: " + name + "\n" + "Địa chỉ giao hàng: " + address + "\n" + "Điện thoại: "
-				+ phone + "\n" + "\n" + "Sản phẩm: " + sanpham + "\n" + "Phí giao hàng: 40.000đ" + "\n" + "Tổng cộng: "
-				+ tong;
+//		String billDetail = "Khách hàng: " + name + "\n" + "Địa chỉ giao hàng: " + address + "\n" + "Điện thoại: "
+//				+ phone + "\n" + "\n" + "Sản phẩm: " + sanpham + "\n" + "Phí giao hàng: 40.000đ" + "\n" + "Tổng cộng: "
+//				+ tong;
+//
+//		// create bill
 
-		// create bill
-		File file = new File(getServletContext().getRealPath("hoadon/" + folderName + "/" + fileName + ".txt"));
-//		FileUtils.writeStringToFile(file, billDetail, "UTF-8");
 
 		ProductDAO productDAO = new ProductDAO();
 		productDAO.insertOrder(userId, fileName, tongTien, address, phone);

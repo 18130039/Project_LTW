@@ -116,7 +116,7 @@
 					</div>
 					<div class="hero__search__phone">
 						<div class="header__top__right__auth">
-							<c:if test="${sessionScope.acc.isAdmin == 1 }">
+							<c:if test="${sessionScope.acc != null}">
 								<div class="header__top__right__auth">
 									<i class="fa fa-user"></i> Xin chào,${sessionScope.acc.name}
 								</div>

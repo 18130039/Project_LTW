@@ -229,7 +229,6 @@
                     <div class="product__pagination">
                         <c:forEach begin="1" end="${endPage}" var="i">
                             <a id="${i}" href="shopGrid?index=${i}">${i}</a>
-
                         </c:forEach>
                     </div>
                 </div>

@@ -72,7 +72,7 @@ public class ProductDAO {
 	}
 
 	public void deleteProduct(String pid) {
-		String sql = "delete from products where id = ?";
+		String sql = "delete from Product where pId = ?";
 		try {
 			con = ConnectDB.getConnect();
 			ps = con.prepareStatement(sql);
@@ -247,7 +247,7 @@ public class ProductDAO {
 	public List<Product> getSearchList(String txtSearch, int index, int size) {
 		List<Product> list = new LinkedList<>();
 		String sql = "with x as(select *,ROW_NUMBER() over (ORDER by pId DESC) as r\n"
-				+ "                from Product where name like ?)\n"
+				+ "                from Product where pName like ?)\n"
 				+ "                select * from x where r between (?*?-(?-1)) and (?*?)";
 
 		try {
@@ -272,10 +272,11 @@ public class ProductDAO {
 
 	public int count(String txtSearch) throws SQLException, ClassNotFoundException {
 
-		String query = "select count(*) from Product where pName like " + "'%" + txtSearch + "%'";
+		String query = "select count(*) from Product where pName like " + "%" + txtSearch + "%";
 		con = ConnectDB.getConnect();
 		ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery(query);
+		System.out.println(rs.next());
 		while (rs.next()) {
 			return rs.getInt(1);
 		}
@@ -285,9 +286,9 @@ public class ProductDAO {
 		return 0;
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		ProductDAO productDAO = new ProductDAO();
-		System.out.println(productDAO.getAll());
+		System.out.println(productDAO.getSearchList(null, 0, 0));
 
 	}
 }
